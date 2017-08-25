@@ -1,0 +1,14 @@
+	executable   = ../updown_network.py 
+ 	universe     = vanilla  
+	request_gpus = 1 
+	request_memory = 16GB 
+	requirements = TARGET.CUDACapability 
+	log          = train_hist/2017-08-25/time_h012_v1/condor.log 
+	output       = train_hist/2017-08-25/time_h012_v1/condor.out 
+	error        = train_hist/2017-08-25/time_h012_v1/condor.err 
+	getenv = True 
+ 	stream_output = True 
+	IWD = /data/user/jkager/NN_Reco/johannes/updownclassification_4/ 
+	arguments =  --project time_h012_v1 --continue None --model=CNN_v1.cfg --input=h012 --using=time --date 2017-08-25 
+	queue 1 
+	

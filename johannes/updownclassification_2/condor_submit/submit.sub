@@ -1,0 +1,15 @@
+	executable   = ../updown_network.py 
+ 	universe     = vanilla  
+	request_gpus = 1 
+	request_memory = 16GB 
+	requirements = TARGET.CUDACapability 
+	log          = train_hist/2017-08-23/charge_h012_lowlr_v1/condor.log 
+	output       = train_hist/2017-08-23/charge_h012_lowlr_v1/condor.out 
+	error        = train_hist/2017-08-23/charge_h012_lowlr_v1/condor.err 
+	getenv = True 
+ 	stream_output = True 
+	IWD = /data/user/jkager/NN_Reco/johannes/updownclassification_2/ 
+	arguments =  --virtual_len -1 --project charge_h012_lowlr_v1 --continue None --using charge --date None --input 11069_00000-00999.h5:11069_01000-01999.h5:11069_02000-02999.h5 --model FCNN_v1 --date 2017-08-23 
+	queue 1 
+	Submitting job(s).
+1 job(s) submitted to cluster 263641286.
