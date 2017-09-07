@@ -1,0 +1,148 @@
+
+ ############################################
+You are running the network script with arguments: 
+virtual_len: -1
+testing: False
+filesizes: False
+project: charge_h012_v1
+crtfolders: False
+continue: None
+using: charge
+date: 2017-08-24
+input: h012
+model: CNN_v1.cfg
+############################################
+ 
+[(0, 124352), (0, 125784), (0, 125878)]
+[(124352, 165803), (125784, 167712), (125878, 167837)]
+[(165803, 207253), (167712, 209639), (167837, 209796)]
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv3d_1 (Conv3D)            (None, 9, 5, 28, 64)      3136      
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 9, 5, 28, 64)      256       
+_________________________________________________________________
+activation_1 (Activation)    (None, 9, 5, 28, 64)      0         
+_________________________________________________________________
+conv3d_2 (Conv3D)            (None, 5, 3, 14, 64)      110656    
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 5, 3, 14, 64)      256       
+_________________________________________________________________
+activation_2 (Activation)    (None, 5, 3, 14, 64)      0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 13440)             0         
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 13440)             0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 512)               6881792   
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 512)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 256)               131328    
+_________________________________________________________________
+dense_3 (Dense)              (None, 1)                 257       
+=================================================================
+Total params: 7,127,681
+Trainable params: 7,127,425
+Non-trainable params: 256
+_________________________________________________________________
+None
+Epoch 1/30
+Epoch 00000: val_loss improved from inf to 0.47724, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+973s - loss: 0.4575 - acc: 0.8181 - val_loss: 0.4772 - val_acc: 0.8102
+Epoch 2/30
+Epoch 00001: val_loss improved from 0.47724 to 0.40928, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+951s - loss: 0.4210 - acc: 0.8340 - val_loss: 0.4093 - val_acc: 0.8392
+Epoch 3/30
+Epoch 00002: val_loss improved from 0.40928 to 0.40285, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+951s - loss: 0.4087 - acc: 0.8392 - val_loss: 0.4029 - val_acc: 0.8414
+Epoch 4/30
+Epoch 00003: val_loss improved from 0.40285 to 0.39167, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+951s - loss: 0.4000 - acc: 0.8431 - val_loss: 0.3917 - val_acc: 0.8471
+Epoch 5/30
+Epoch 00004: val_loss improved from 0.39167 to 0.37768, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+949s - loss: 0.3859 - acc: 0.8470 - val_loss: 0.3777 - val_acc: 0.8493
+Epoch 6/30
+Epoch 00005: val_loss did not improve
+RAM Usage 1.17 GB
+949s - loss: 0.3659 - acc: 0.8503 - val_loss: 0.4084 - val_acc: 0.8308
+Epoch 7/30
+Epoch 00006: val_loss improved from 0.37768 to 0.35078, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+949s - loss: 0.3580 - acc: 0.8516 - val_loss: 0.3508 - val_acc: 0.8553
+Epoch 8/30
+Epoch 00007: val_loss did not improve
+RAM Usage 1.17 GB
+950s - loss: 0.3524 - acc: 0.8523 - val_loss: 0.5143 - val_acc: 0.7925
+Epoch 9/30
+Epoch 00008: val_loss improved from 0.35078 to 0.34637, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+952s - loss: 0.3434 - acc: 0.8551 - val_loss: 0.3464 - val_acc: 0.8551
+Epoch 10/30
+Epoch 00009: val_loss did not improve
+RAM Usage 1.17 GB
+947s - loss: 0.3348 - acc: 0.8573 - val_loss: 0.3624 - val_acc: 0.8542
+Epoch 11/30
+Epoch 00010: val_loss improved from 0.34637 to 0.34587, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+951s - loss: 0.3223 - acc: 0.8595 - val_loss: 0.3459 - val_acc: 0.8557
+Epoch 12/30
+Epoch 00011: val_loss did not improve
+RAM Usage 1.17 GB
+951s - loss: 0.3227 - acc: 0.8601 - val_loss: 0.3824 - val_acc: 0.8345
+Epoch 13/30
+Epoch 00012: val_loss did not improve
+RAM Usage 1.17 GB
+951s - loss: 0.3164 - acc: 0.8615 - val_loss: 0.3650 - val_acc: 0.8539
+Epoch 14/30
+Epoch 00013: val_loss improved from 0.34587 to 0.33278, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-24/charge_h012_v1/best_val_loss.npy
+RAM Usage 1.17 GB
+952s - loss: 0.3130 - acc: 0.8627 - val_loss: 0.3328 - val_acc: 0.8565
+Epoch 15/30
+Epoch 00014: val_loss did not improve
+RAM Usage 1.17 GB
+950s - loss: 0.3099 - acc: 0.8637 - val_loss: 0.3439 - val_acc: 0.8566
+Epoch 16/30
+Epoch 00015: val_loss did not improve
+RAM Usage 1.17 GB
+948s - loss: 0.2977 - acc: 0.8665 - val_loss: 0.3890 - val_acc: 0.8480
+Epoch 17/30
+Epoch 00016: val_loss did not improve
+RAM Usage 1.17 GB
+951s - loss: 0.3030 - acc: 0.8658 - val_loss: 0.3375 - val_acc: 0.8591
+Epoch 18/30
+Epoch 00017: val_loss did not improve
+RAM Usage 1.17 GB
+948s - loss: 0.2914 - acc: 0.8696 - val_loss: 0.4512 - val_acc: 0.8157
+Epoch 19/30
+Epoch 00018: val_loss did not improve
+RAM Usage 1.17 GB
+950s - loss: 0.2924 - acc: 0.8702 - val_loss: 0.6971 - val_acc: 0.7821
+Epoch 20/30
+Epoch 00019: val_loss did not improve
+RAM Usage 1.17 GB
+953s - loss: 0.2956 - acc: 0.8701 - val_loss: 0.5385 - val_acc: 0.7769
+Epoch 21/30
+Epoch 00020: val_loss did not improve
+RAM Usage 1.17 GB
+950s - loss: 0.2822 - acc: 0.8743 - val_loss: 0.3950 - val_acc: 0.8539
+Epoch 00020: early stopping
+time to fit: 5h 33min 24.57sec
+
+ Save the Model 
+
+
+ Calculate Results... 
+
+Predict Values for 11069_00000-00999.h5
+Predict Values for 11069_01000-01999.h5
+Predict Values for 11069_02000-02999.h5
+106914 / 125336 =  85.30%
+ 
+ Finished .... 

@@ -1,0 +1,34 @@
+
+ ############################################
+You are running the network script with arguments: 
+virtual_len: -1
+testing: True
+filesizes: False
+project: charge_h012_v1
+crtfolders: False
+continue: None
+using: time
+date: 2017-08-24
+input: all
+model: FCNN_v1.cfg
+############################################
+ 
+looking for train_hist/2017-08-28/charge_h012_v1
+looking for train_hist/2017-08-26/charge_h012_v1
+looking for train_hist/2017-08-25/charge_h012_v1
+looking for train_hist/2017-08-24/charge_h012_v1
+project found!
+Input Files: ['11069_00000-00999.h5', '11069_01000-01999.h5', '11069_02000-02999.h5']
+All files found. proceeding...
+
+ Load the Model (final_network.h5) 
+
+
+ Calculate Results... 
+
+Predict Values for 11069_00000-00999.h5
+Predict Values for 11069_01000-01999.h5
+Predict Values for 11069_02000-02999.h5
+106914 / 125336 =  85.30%
+ 
+ Finished .... 

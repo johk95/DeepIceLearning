@@ -1,0 +1,183 @@
+
+ ############################################
+You are running the network script with arguments: 
+virtual_len: -1
+testing: False
+filesizes: False
+project: time_h0_v2_lowbatch
+crtfolders: False
+continue: None
+using: time
+date: 2017-08-28
+input: h0
+model: CNN_v2.cfg
+############################################
+ 
+[(0, 124352)]
+[(124352, 165803)]
+[(165803, 207253)]
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv3d_1 (Conv3D)            (None, 10, 10, 20, 64)    3136      
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 10, 10, 20, 64)    256       
+_________________________________________________________________
+activation_1 (Activation)    (None, 10, 10, 20, 64)    0         
+_________________________________________________________________
+conv3d_2 (Conv3D)            (None, 10, 10, 10, 32)    55328     
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 10, 10, 10, 32)    128       
+_________________________________________________________________
+activation_2 (Activation)    (None, 10, 10, 10, 32)    0         
+_________________________________________________________________
+max_pooling3d_1 (MaxPooling3 (None, 5, 5, 5, 32)       0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 4000)              0         
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 4000)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 256)               1024256   
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 128)               32896     
+_________________________________________________________________
+dense_3 (Dense)              (None, 1)                 129       
+=================================================================
+Total params: 1,116,129
+Trainable params: 1,115,937
+Non-trainable params: 192
+_________________________________________________________________
+None
+Epoch 1/30
+Epoch 00000: val_loss improved from inf to 0.41667, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.80 GB
+539s - loss: 0.4695 - acc: 0.8056 - val_loss: 0.4167 - val_acc: 0.8358
+Epoch 2/30
+Epoch 00001: val_loss improved from 0.41667 to 0.40608, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.81 GB
+528s - loss: 0.4141 - acc: 0.8317 - val_loss: 0.4061 - val_acc: 0.8364
+Epoch 3/30
+Epoch 00002: val_loss improved from 0.40608 to 0.39480, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+528s - loss: 0.3937 - acc: 0.8377 - val_loss: 0.3948 - val_acc: 0.8400
+Epoch 4/30
+Epoch 00003: val_loss improved from 0.39480 to 0.37980, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+530s - loss: 0.3806 - acc: 0.8392 - val_loss: 0.3798 - val_acc: 0.8443
+Epoch 5/30
+Epoch 00004: val_loss improved from 0.37980 to 0.37703, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+532s - loss: 0.3664 - acc: 0.8444 - val_loss: 0.3770 - val_acc: 0.8390
+Epoch 6/30
+Epoch 00005: val_loss improved from 0.37703 to 0.34862, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+537s - loss: 0.3552 - acc: 0.8466 - val_loss: 0.3486 - val_acc: 0.8525
+Epoch 7/30
+Epoch 00006: val_loss improved from 0.34862 to 0.34020, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+533s - loss: 0.3421 - acc: 0.8515 - val_loss: 0.3402 - val_acc: 0.8509
+Epoch 8/30
+Epoch 00007: val_loss improved from 0.34020 to 0.30458, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+528s - loss: 0.3265 - acc: 0.8581 - val_loss: 0.3046 - val_acc: 0.8657
+Epoch 9/30
+Epoch 00008: val_loss improved from 0.30458 to 0.28404, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+526s - loss: 0.3113 - acc: 0.8644 - val_loss: 0.2840 - val_acc: 0.8764
+Epoch 10/30
+Epoch 00009: val_loss improved from 0.28404 to 0.26409, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+526s - loss: 0.2916 - acc: 0.8721 - val_loss: 0.2641 - val_acc: 0.8892
+Epoch 11/30
+Epoch 00010: val_loss improved from 0.26409 to 0.25596, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+528s - loss: 0.2758 - acc: 0.8817 - val_loss: 0.2560 - val_acc: 0.8973
+Epoch 12/30
+Epoch 00011: val_loss improved from 0.25596 to 0.24723, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+525s - loss: 0.2632 - acc: 0.8874 - val_loss: 0.2472 - val_acc: 0.8971
+Epoch 13/30
+Epoch 00012: val_loss improved from 0.24723 to 0.23095, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+525s - loss: 0.2495 - acc: 0.8935 - val_loss: 0.2310 - val_acc: 0.9059
+Epoch 14/30
+Epoch 00013: val_loss did not improve
+RAM Usage 0.83 GB
+526s - loss: 0.2407 - acc: 0.8972 - val_loss: 0.2329 - val_acc: 0.9059
+Epoch 15/30
+Epoch 00014: val_loss improved from 0.23095 to 0.21763, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+526s - loss: 0.2317 - acc: 0.9017 - val_loss: 0.2176 - val_acc: 0.9085
+Epoch 16/30
+Epoch 00015: val_loss did not improve
+RAM Usage 0.83 GB
+527s - loss: 0.2246 - acc: 0.9044 - val_loss: 0.2289 - val_acc: 0.9015
+Epoch 17/30
+Epoch 00016: val_loss did not improve
+RAM Usage 0.83 GB
+529s - loss: 0.2160 - acc: 0.9101 - val_loss: 0.2348 - val_acc: 0.8967
+Epoch 18/30
+Epoch 00017: val_loss improved from 0.21763 to 0.21673, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+525s - loss: 0.2088 - acc: 0.9118 - val_loss: 0.2167 - val_acc: 0.9128
+Epoch 19/30
+Epoch 00018: val_loss did not improve
+RAM Usage 0.83 GB
+525s - loss: 0.2020 - acc: 0.9151 - val_loss: 0.2182 - val_acc: 0.9120
+Epoch 20/30
+Epoch 00019: val_loss did not improve
+RAM Usage 0.83 GB
+526s - loss: 0.1979 - acc: 0.9169 - val_loss: 0.2174 - val_acc: 0.9147
+Epoch 21/30
+Epoch 00020: val_loss improved from 0.21673 to 0.21509, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+525s - loss: 0.1929 - acc: 0.9205 - val_loss: 0.2151 - val_acc: 0.9144
+Epoch 22/30
+Epoch 00021: val_loss improved from 0.21509 to 0.21290, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+529s - loss: 0.1883 - acc: 0.9221 - val_loss: 0.2129 - val_acc: 0.9161
+Epoch 23/30
+Epoch 00022: val_loss did not improve
+RAM Usage 0.83 GB
+524s - loss: 0.1814 - acc: 0.9243 - val_loss: 0.2144 - val_acc: 0.9148
+Epoch 24/30
+Epoch 00023: val_loss did not improve
+RAM Usage 0.83 GB
+524s - loss: 0.1750 - acc: 0.9273 - val_loss: 0.2142 - val_acc: 0.9137
+Epoch 25/30
+Epoch 00024: val_loss improved from 0.21290 to 0.20392, saving model to /data/user/jkager/NN_Reco/johannes/updownclassification_3/train_hist/2017-08-28/time_h0_v2_lowbatch/best_val_loss.npy
+RAM Usage 0.83 GB
+525s - loss: 0.1710 - acc: 0.9289 - val_loss: 0.2039 - val_acc: 0.9173
+Epoch 26/30
+Epoch 00025: val_loss did not improve
+RAM Usage 0.83 GB
+532s - loss: 0.1670 - acc: 0.9304 - val_loss: 0.2092 - val_acc: 0.9152
+Epoch 27/30
+Epoch 00026: val_loss did not improve
+RAM Usage 0.83 GB
+561s - loss: 0.1662 - acc: 0.9320 - val_loss: 0.2054 - val_acc: 0.9172
+Epoch 28/30
+Epoch 00027: val_loss did not improve
+RAM Usage 0.83 GB
+526s - loss: 0.1589 - acc: 0.9336 - val_loss: 0.2054 - val_acc: 0.9169
+Epoch 29/30
+Epoch 00028: val_loss did not improve
+RAM Usage 0.83 GB
+525s - loss: 0.1567 - acc: 0.9353 - val_loss: 0.2423 - val_acc: 0.9132
+Epoch 30/30
+Epoch 00029: val_loss did not improve
+RAM Usage 0.83 GB
+525s - loss: 0.1518 - acc: 0.9379 - val_loss: 0.2107 - val_acc: 0.9171
+time to fit: 4h 25min 2.60sec
+
+ Save the Model 
+
+
+ Calculate Results... 
+
+Predict Values for 11069_00000-00999.h5
+37949 / 41450 =  91.55%
+ 
+ Finished .... 

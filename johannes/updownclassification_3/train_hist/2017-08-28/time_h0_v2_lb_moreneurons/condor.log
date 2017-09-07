@@ -1,0 +1,52 @@
+000 (264138004.000.000) 08/28 09:57:09 Job submitted from host: <172.16.223.61:46079?addrs=172.16.223.61-46079>
+...
+001 (264138004.000.000) 08/28 10:08:52 Job executing on host: <10.128.10.233:46620?addrs=10.128.10.233-46620>
+...
+006 (264138004.000.000) 08/28 10:09:00 Image size of job updated: 202360
+	192  -  MemoryUsage of job (MB)
+	196220  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 10:14:00 Image size of job updated: 624140
+	602  -  MemoryUsage of job (MB)
+	615960  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 10:19:01 Image size of job updated: 671164
+	650  -  MemoryUsage of job (MB)
+	665160  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 10:39:02 Image size of job updated: 687684
+	668  -  MemoryUsage of job (MB)
+	683624  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 12:34:13 Image size of job updated: 687684
+	668  -  MemoryUsage of job (MB)
+	683716  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 13:14:17 Image size of job updated: 687684
+	668  -  MemoryUsage of job (MB)
+	683808  -  ResidentSetSize of job (KB)
+...
+006 (264138004.000.000) 08/28 13:24:19 Image size of job updated: 4791972
+	4678  -  MemoryUsage of job (MB)
+	4789468  -  ResidentSetSize of job (KB)
+...
+005 (264138004.000.000) 08/28 13:24:21 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 02:52:39, Sys 0 00:31:07  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 02:52:39, Sys 0 00:31:07  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Admin_mutex_1         :                           1
+	   Admin_mutex_2         :                           1
+	   Admin_mutex_3         :                           1
+	   Cpus                  :                 1         1
+	   Disk (KB)             :       20  1000000   8092268
+	   Gpus                  :                 1         1
+	   Machine_token         :                           1
+	   Memory (MB)           :     4678    16384     16384
+...

@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/mnt/lfs3/user/jkager/NN_Reco/johannes/updownclassification_3/condor_submit/../updown_network.py", line 316, in <module>
+    max_q_size=int(parser.get('Training_Parameters', 'max_queue_size'))
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/legacy/interfaces.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/models.py", line 1124, in fit_generator
+    initial_epoch=initial_epoch)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/legacy/interfaces.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/engine/training.py", line 1902, in fit_generator
+    class_weight=class_weight)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/engine/training.py", line 1642, in train_on_batch
+    outputs = self.train_function(ins)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/backend/theano_backend.py", line 1196, in __call__
+    return self.function(*inputs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/compile/function_module.py", line 898, in __call__
+    storage_map=getattr(self.fn, 'storage_map', None))
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/gof/link.py", line 325, in raise_with_op
+    reraise(exc_type, exc_value, exc_trace)
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/compile/function_module.py", line 884, in __call__
+    self.fn() if output_subset is None else\
+ValueError: GpuReshape: cannot reshape input of shape (1000, 3, 2, 8, 64) to shape (42000, 64).
+Apply node that caused the error: GpuReshape{2}(GpuElemwise{Add}[(0, 0)].0, MakeVector{dtype='int64'}.0)
+Toposort index: 281
+Inputs types: [CudaNdarrayType(float32, 5D), TensorType(int64, vector)]
+Inputs shapes: [(1000, 3, 2, 8, 64), (2,)]
+Inputs strides: [(3072, 16, 8, 1, 48), (8,)]
+Inputs values: ['not shown', array([42000,    64])]
+Outputs clients: [[GpuCAReduce{add}{1,0}(GpuReshape{2}.0)]]
+
+HINT: Re-running with most Theano optimization disabled could give you a back-trace of when this node was created. This can be done with by setting the Theano flag 'optimizer=fast_compile'. If that does not work, Theano optimizations can be disabled with 'optimizer=None'.
+HINT: Use the Theano flag 'exception_verbosity=high' for a debugprint and storage map footprint of this apply node.

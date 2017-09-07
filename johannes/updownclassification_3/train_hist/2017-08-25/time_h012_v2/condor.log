@@ -1,0 +1,78 @@
+000 (263905041.000.000) 08/25 15:02:34 Job submitted from host: <172.16.223.61:46079?addrs=172.16.223.61-46079>
+...
+001 (263905041.000.000) 08/25 15:10:03 Job executing on host: <10.128.10.108:39366?addrs=10.128.10.108-39366>
+...
+006 (263905041.000.000) 08/25 15:10:12 Image size of job updated: 236004
+	208  -  MemoryUsage of job (MB)
+	212136  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 15:15:13 Image size of job updated: 823932
+	763  -  MemoryUsage of job (MB)
+	780692  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 15:20:13 Image size of job updated: 858528
+	797  -  MemoryUsage of job (MB)
+	815464  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 15:25:13 Image size of job updated: 986148
+	921  -  MemoryUsage of job (MB)
+	942624  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 15:30:14 Image size of job updated: 1093336
+	1026  -  MemoryUsage of job (MB)
+	1049880  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 15:40:15 Image size of job updated: 1093764
+	1026  -  MemoryUsage of job (MB)
+	1049880  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 16:50:22 Image size of job updated: 1093764
+	1026  -  MemoryUsage of job (MB)
+	1049920  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 17:20:25 Image size of job updated: 1093764
+	1026  -  MemoryUsage of job (MB)
+	1050016  -  ResidentSetSize of job (KB)
+...
+006 (263905041.000.000) 08/25 18:20:31 Image size of job updated: 1094096
+	1026  -  MemoryUsage of job (MB)
+	1050016  -  ResidentSetSize of job (KB)
+...
+004 (263905041.000.000) 08/25 19:06:32 Job was evicted.
+	(0) Job was not checkpointed.
+		Usr 0 03:30:48, Sys 0 00:35:38  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Admin_mutex_1         :                           1
+	   Admin_mutex_2         :                           1
+	   Admin_mutex_3         :                           1
+	   Cpus                  :                 1         1
+	   Disk (KB)             :       20  1000000   8106474
+	   Gpus                  :                 1         8
+	   Machine_token         :                           1
+	   Memory (MB)           :     1026    16384     16384
+...
+001 (263905041.000.000) 08/25 19:10:32 Job executing on host: <10.128.10.162:39977?addrs=10.128.10.162-39977>
+...
+005 (263905041.000.000) 08/25 19:11:24 Job terminated.
+	(1) Normal termination (return value 1)
+		Usr 0 00:00:29, Sys 0 00:00:05  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:29, Sys 0 00:00:05  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Admin_mutex_1         :                           1
+	   Admin_mutex_2         :                           1
+	   Admin_mutex_3         :                           1
+	   Cpus                  :                 1         1
+	   Disk (KB)             :       20  1000000   8098140
+	   Gpus                  :                 1         1
+	   Machine_token         :                           0
+	   Memory (MB)           :     1221    16384     16384
+...

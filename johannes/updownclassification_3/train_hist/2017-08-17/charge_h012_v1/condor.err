@@ -1,0 +1,33 @@
+Error allocating 15360000000 bytes of device memory (out of memory). Driver report 3694460928 bytes free and 4233691136 bytes total 
+Traceback (most recent call last):
+  File "/mnt/lfs3/user/jkager/NN_Reco/johannes/updownclassification_3/condor_submit/../updown_network.py", line 317, in <module>
+    max_q_size=int(parser.get('Training_Parameters', 'max_queue_size'))
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/legacy/interfaces.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/models.py", line 1124, in fit_generator
+    initial_epoch=initial_epoch)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/legacy/interfaces.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/engine/training.py", line 1902, in fit_generator
+    class_weight=class_weight)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/engine/training.py", line 1642, in train_on_batch
+    outputs = self.train_function(ins)
+  File "/home/jkager/.local/lib/python2.7/site-packages/keras/backend/theano_backend.py", line 1196, in __call__
+    return self.function(*inputs)
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/compile/function_module.py", line 898, in __call__
+    storage_map=getattr(self.fn, 'storage_map', None))
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/gof/link.py", line 325, in raise_with_op
+    reraise(exc_type, exc_value, exc_trace)
+  File "/home/jkager/.local/lib/python2.7/site-packages/theano/compile/function_module.py", line 884, in __call__
+    self.fn() if output_subset is None else\
+MemoryError: Error allocating 15360000000 bytes of device memory (out of memory).
+Apply node that caused the error: GpuAllocEmpty(Assert{msg='The convolution would produce an invalid shape (dim[0] < 0).'}.0, Assert{msg='The convolution would produce an invalid shape (dim[1] < 0).'}.0, Assert{msg='The convolution would produce an invalid shape (dim[2] <= 0).'}.0, Assert{msg='The convolution would produce an invalid shape (dim[3] <= 0).'}.0, Assert{msg='The convolution would produce an invalid shape (dim[4] <= 0).'}.0)
+Toposort index: 201
+Inputs types: [TensorType(int64, scalar), TensorType(int64, scalar), TensorType(int64, scalar), TensorType(int64, scalar), TensorType(int64, scalar)]
+Inputs shapes: [(), (), (), (), ()]
+Inputs strides: [(), (), (), (), ()]
+Inputs values: [array(5000), array(64), array(20), array(10), array(60)]
+Outputs clients: [[GpuDnnConv3d{algo='small', inplace=False}(GpuContiguous.0, GpuContiguous.0, GpuAllocEmpty.0, GpuDnnConvDesc{border_mode='half', subsample=(1, 1, 1), conv_mode='conv', precision='float32'}.0, Constant{1.0}, Constant{0.0})]]
+
+HINT: Re-running with most Theano optimization disabled could give you a back-trace of when this node was created. This can be done with by setting the Theano flag 'optimizer=fast_compile'. If that does not work, Theano optimizations can be disabled with 'optimizer=None'.
+HINT: Use the Theano flag 'exception_verbosity=high' for a debugprint and storage map footprint of this apply node.
