@@ -3,12 +3,12 @@
     request_gpus = 1 
     request_memory = 16GB 
     requirements = TARGET.CUDACapability 
-    log          = train_hist/2017-08-25/time_h012_v2_2/condor.log 
-    output       = train_hist/2017-08-25/time_h012_v2_2/condor.out 
-    error        = train_hist/2017-08-25/time_h012_v2_2/condor.err 
+    log          = train_hist/2017-09-07/time_l0_v1_lowbatch/condor.log 
+    output       = train_hist/2017-09-07/time_l0_v1_lowbatch/condor.out 
+    error        = train_hist/2017-09-07/time_l0_v1_lowbatch/condor.err 
     getenv = True 
      stream_output = True 
     IWD = /data/user/jkager/NN_Reco/johannes/updownclassification_3/ 
-    arguments =  --project time_h012_v2_2 --continue None --model=CNN_v2.cfg --input=h012 --using=time --date 2017-08-25 
+    arguments =  --project time_l0_v1_lowbatch --continue None --model=CNN_v1.cfg --input=l0 --using=time --date 2017-09-07 
     queue 1 
     

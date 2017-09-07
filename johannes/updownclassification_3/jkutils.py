@@ -3,6 +3,8 @@ import h5py
 import numpy as np
 import itertools
 
+mycol = [(0,113/255.0,187/255.0),(89/255.0,186/255.0,115/255.0)]
+
 # Define a context manager to suppress stdout and stderr.
 class suppress_stdout_stderr(object):
     '''

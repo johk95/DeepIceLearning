@@ -1,0 +1,13 @@
+    executable   = ../evaluation.py 
+     universe     = vanilla  
+    request_gpus = 1 
+    request_memory = 8GB 
+    requirements = TARGET.CUDACapability 
+    log          = evaluation/condor.log 
+    output       = evaluation/condor.out 
+    error        = evaluation/condor.err 
+    getenv = True 
+    stream_output = True 
+    IWD = /data/user/jkager/NN_Reco/johannes/updownclassification_3/  
+    queue 1 
+    

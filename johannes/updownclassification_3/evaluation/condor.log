@@ -1,0 +1,48 @@
+000 (265224930.000.000) 09/06 14:58:53 Job submitted from host: <172.16.223.61:56276?addrs=172.16.223.61-56276>
+...
+001 (265224930.000.000) 09/06 15:06:07 Job executing on host: <10.128.10.216:44292?addrs=10.128.10.216-44292>
+...
+007 (265224930.000.000) 09/06 15:06:08 Shadow exception!
+	Error from slot1@gtx-1.icecube.wisc.edu: Failed to execute '/mnt/lfs3/user/jkager/NN_Reco/johannes/updownclassification_3/evaluation/../evaluation.py': (errno=13: 'Permission denied')
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+...
+012 (265224930.000.000) 09/06 15:06:08 Job was held.
+	Error from slot1@gtx-1.icecube.wisc.edu: Failed to execute '/mnt/lfs3/user/jkager/NN_Reco/johannes/updownclassification_3/evaluation/../evaluation.py': (errno=13: 'Permission denied')
+	Code 6 Subcode 13
+...
+009 (265224930.000.000) 09/06 15:41:15 Job was aborted by the user.
+	via condor_rm (by user jkager)
+...
+000 (265235057.000.000) 09/06 15:42:42 Job submitted from host: <172.16.223.61:56276?addrs=172.16.223.61-56276>
+...
+001 (265235057.000.000) 09/06 15:44:09 Job executing on host: <10.128.10.163:36724?addrs=10.128.10.163-36724>
+...
+006 (265235057.000.000) 09/06 15:44:18 Image size of job updated: 64356
+	55  -  MemoryUsage of job (MB)
+	55732  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 15:49:19 Image size of job updated: 4223408
+	4121  -  MemoryUsage of job (MB)
+	4218920  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 15:54:19 Image size of job updated: 4223440
+	4121  -  MemoryUsage of job (MB)
+	4218920  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 15:59:19 Image size of job updated: 4223752
+	4121  -  MemoryUsage of job (MB)
+	4218924  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 16:04:20 Image size of job updated: 4223780
+	4121  -  MemoryUsage of job (MB)
+	4218924  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 16:34:23 Image size of job updated: 4223816
+	4121  -  MemoryUsage of job (MB)
+	4218924  -  ResidentSetSize of job (KB)
+...
+006 (265235057.000.000) 09/06 18:49:38 Image size of job updated: 4224248
+	4121  -  MemoryUsage of job (MB)
+	4218924  -  ResidentSetSize of job (KB)
+...
