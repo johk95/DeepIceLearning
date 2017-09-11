@@ -70,7 +70,7 @@ def get_filenames(input_arg):
         return high_files[0:3]
     elif len(input_arg) > 0 and (input_arg[0] == 'h' or input_arg[0] == 'l') and input_arg[1].isdigit():
         inputs = {k:v for k, v in zip(*[iter(["".join(x) for _, x in itertools.groupby(input_arg, key=str.isdigit)])]*2)}
-        files = ''
+        files = []
         if 'h' in inputs:
             files = [high_files[i] for i in map(int, list(inputs['h']))]
         if 'l' in inputs:
@@ -137,22 +137,28 @@ def read_files(input_files, data_location, using='time', virtual_len=-1, printfi
     return input_data, out_data, file_len
 
 
-def zenith_to_binary(zenith):
+def zenith_to_binary(zenith, cosined = False):
     """
     returns boolean values for the zenith (0 or 1; up or down) and preserves input format.
     """
     if type(zenith) == np.ndarray:
         ret = np.copy(zenith)
+        if cosined:
+            ret = np.arccos(ret)
         ret[ret < 1.5707963268] = 0.0
         ret[ret > 1] = 1.0
         return ret
     if isinstance(zenith, float) or isinstance(zenith, int):
+        if cosined:
+            zenith = np.arccos(zenith)
         return 1.0 if zenith > 1.5707963268 else 0.0
     if isinstance(zenith, list):
-        temp_zenith = np.array(zenith)
-        temp_zenith[temp_zenith < 1.5707963268] = 0.0
-        temp_zenith[temp_zenith > 1] = 1.0
-        return temp_zenith.tolist()
+        ret = np.array(zenith)
+        if cosined:
+            ret = np.arccos(ret)
+        ret[ret < 1.5707963268] = 0.0
+        ret[ret > 1] = 1.0
+        return ret.tolist()
     
         
 def preprocess(data, replace_with=10):
@@ -193,4 +199,29 @@ def fake_preprocess(data, replace_with=0):
         same as input data.
     """
     return data
+
+
+
+def figsize(scale,scale_height=None):
+    fig_width_pt = 360.0                          # Get this from LaTeX using \the\textwidth
+    inches_per_pt = 1.0/72.27                       # Convert pt to inch
+    golden_mean = (np.sqrt(5.0)-1.0)/2.0            # Aesthetic ratio (you could change this)
+    if scale_height == None or type(scale_height) not in (int,float):
+        scale_height = golden_mean
+    height_scale = scale_height
+    fig_width = fig_width_pt*inches_per_pt*scale    # width in inches
+    fig_height = fig_width*height_scale              # height in inches
+    fig_size = [fig_width,fig_height]
+    return fig_size
+
+def savefig(filename, folder="../plots"):
+    plt.savefig(os.path.join(folder,'{}.pgf'.format(filename)))
+    plt.savefig(os.path.join(folder,'{}_pdf.pdf'.format(filename)))
+
+def get_plotted_x(x_hist, bins):
+    ranges = float(x_hist[-1] - x_hist[0])
+    ret = x_hist[:-1]+ranges/(bins-1)/2
+    ret[0]= x_hist[0]
+    ret[-1] = x_hist[-1]
+    return ret
 
