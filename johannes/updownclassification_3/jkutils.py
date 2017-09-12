@@ -163,7 +163,8 @@ def zenith_to_binary(zenith, cosined = False):
         
 def preprocess(data, replace_with=10):
     """
-    This function replaces infinity-values in the input array with replace_with (defaults to 10).
+    This function normalizes the finite values of input data to the interval [0,1] and 
+    replaces all infinity-values with replace_with (defaults to 10).
     
     Parameters
     ----------
@@ -174,13 +175,12 @@ def preprocess(data, replace_with=10):
     Returns
     -------
     ndarray
-        A copy of the input data with all np.inf replaces by replace_with.
+        A copy of the input data in range [0,1] and all np.inf replaced by replace_with.
     """
-#   print type(times) == np.ndarray
-#   print len(times) == 5000
-#   print type(times[0]) == np.ndarray
-#   print times[0].shape == (20,10,60,1)
     ret = np.copy(data)
+    time_np_arr_max = np.max(ret[ret != np.inf])
+    time_np_arr_min = np.min(ret)
+    ret = (ret - time_np_arr_min) / (time_np_arr_max - time_np_arr_min)
     ret[ret == np.inf] = replace_with
     return ret
 
@@ -225,3 +225,32 @@ def get_plotted_x(x_hist, bins):
     ret[-1] = x_hist[-1]
     return ret
 
+def get_xy_hist(out, res, bins, cosined = True, verbose=False):
+    if np.min(out) < 0:
+        out = np.arccos(out)
+    if cosined:
+        out = np.cos(out)
+        x_hist = np.linspace(-1,1,bins)
+    else:
+        x_hist = np.linspace(0,np.pi,bins)
+    y_hist = np.zeros((bins-1))
+    cor, summe = 0, 0
+    for i in range(len(x_hist)-1):
+        indizes = np.bitwise_and(out >= x_hist[i], out < x_hist[i+1])
+        correct = np.sum(np.round(res[indizes]) == zenith_to_binary(out[indizes],cosined=cosined))
+        if verbose:
+            print correct, np.sum(indizes), np.arccos(x_hist[i]) if cosined else x_hist[i] * 180/math.pi 
+        cor += correct
+        summe += np.sum(indizes)
+        y_hist[i] = float(correct)/np.sum(indizes)
+    print "{:.2f}%".format(100 * cor / float(summe))
+    return x_hist, y_hist
+    
+def get_xy_zenith_hist(zenith_out, bins, cosined = True):
+    x_hist = np.linspace(-1,1,bins) if cosined else np.linspace(0,np.pi,bins)
+    y_zenith_hist = np.zeros((bins-1))
+    hz = np.cos(zenith_out) if cosined else zenith_out
+    for i in range(len(x_hist)-1):
+        y_zenith_hist[i] = np.sum((hz >= x_hist[i]) & (hz < x_hist[i+1]))
+    y_zenith_hist /= ((x_hist[1]-x_hist[0]) * np.sum(y_zenith_hist))
+    return x_hist, y_zenith_hist
