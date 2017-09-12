@@ -19,7 +19,7 @@ with jkutils.suppress_stdout_stderr(): #prevents printed info from theano
     import keras
 from keras.models import Sequential, load_model
 from keras.layers import Dense, Dropout, Activation, Flatten, Convolution2D,\
- BatchNormalization, MaxPooling2D,Convolution3D,MaxPooling3D
+ BatchNormalization, MaxPooling2D,Convolution3D,MaxPooling3D, InputLayer, Reshape
 from keras.optimizers import SGD, Adagrad
 from keras.wrappers.scikit_learn import KerasRegressor
 from keras.utils import np_utils
@@ -50,6 +50,7 @@ def parseArguments():
     parser.add_argument("--project", help="The name for the Project", type=str ,default='updown_NN')
     parser.add_argument("--input", help="Name of the input files seperated by :", type=str ,default='all')
     parser.add_argument("--model", help="Name of the File containing the model", type=str, default='FCNN_v1.cfg')
+    parser.add_argument("--config", help="Path of the config file", type=str, default='None')
     parser.add_argument("--using", help="charge or time", type=str, default='time')
     parser.add_argument("--virtual_len", help="Use an artifical array length (for debugging only!)", type=int , default=-1)
     parser.add_argument("--continue", help="Give a folder to continue the training of the network", type=str, default = 'None')
@@ -65,19 +66,21 @@ def parseArguments():
 
 def add_layer(model, layer, args, kwargs):
     eval('model.add({}(*args,**kwargs))'.format(layer))
-    return
+    print "{}({}, {})".format(layer, ', '.join(map(str,args)), ', '.join('{} = {}'.format(k,str(v)) for k, v in kwargs.items()))
 
 def base_model(model_def):
     model = Sequential()
-    with open(os.path.join(file_location,model_def)) as f:
+    with open(model_def) as f:
         args = []
         kwargs = dict()
         layer = ''
         mode = 'args'
         for line in f:
             cur_line = line.strip()
+            print cur_line, mode, layer
             if cur_line == '' and layer != '':
                 add_layer(model, layer, args, kwargs)
+                mode = 'args'
                 args = []
                 kwargs = dict()
                 layer = ''
@@ -99,7 +102,7 @@ def base_model(model_def):
                 except:
                     kwargs[split_line[0].strip()] = split_line[1].strip()
         if layer != '':
-            add_layer(model, layer, args,kwargs)
+            add_layer(model, layer, args, kwargs)
     
     print(model.summary())
     adam = keras.optimizers.Adam(lr=float(parser.get('Training_Parameters', 'learning_rate')))
@@ -167,14 +170,6 @@ def generator(batch_size, input_data, out_data, inds, inf_times_as = 1):
 if __name__ == "__main__":
 
 #################### Process Command Line Arguments ######################################
-
-    currentfile = inspect.getfile(inspect.currentframe())
-    config_path = os.path.join(os.path.dirname(os.path.abspath(currentfile)), 'config.cfg')
-    parser = ConfigParser()
-    parser.read(config_path)
-    file_location = parser.get('Basics', 'thisfolder') # /data/user/jkager/NN_Reco/johannes/updownclassification_3/
-    data_location = parser.get('Basics', 'data_enc_folder')
-  
     args = parseArguments()
     print"\n ############################################"
     print("You are running the network script with arguments: ")
@@ -185,6 +180,20 @@ if __name__ == "__main__":
     project_name = args.project
   
     input_files = jkutils.get_filenames(args.input)
+
+    if args.config == "None":
+        currentfile = inspect.getfile(inspect.currentframe())
+        config_path = os.path.join(os.path.dirname(os.path.abspath(currentfile)), 'config.cfg')
+    elif os.path.exists(args.config):
+        config_path = args.config
+    else:
+        raise Exception("Specified config file not found!")
+    parser = ConfigParser()
+    parser.read(config_path)
+    file_location = parser.get('Basics', 'thisfolder') # /data/user/jkager/NN_Reco/johannes/updownclassification_3/
+    data_location = parser.get('Basics', 'data_enc_folder')
+  
+    
   
     
 #################### set today date and check for --filesizes #################################  
@@ -272,11 +281,13 @@ if __name__ == "__main__":
             shelf['inf_times_as'] = float(parser.get('Training_Parameters','inf_times_as'))
             shelf.close()
 
-            shutil.copy(args.model, os.path.join(file_location, 'train_hist/{}/{}/model.cfg'.format(today, project_name)))
-            shutil.copy(config_path, os.path.join(file_location, 'train_hist/{}/{}/config.cfg'.format(today, project_name)))           
-            
+            shutil.copy(os.path.join(file_location, args.model), os.path.join(file_location, 'train_hist/{}/{}/model.cfg'.format(today, project_name)))
+             
+            print "building"
+                
 #################### Create Model #########################################################
-            model = base_model(args.model)
+            model = base_model(os.path.join(file_location, args.model))
+            print "built"
             #from keras.utils import plot_model
             #plot_model(model, to_file='model.png')
 
