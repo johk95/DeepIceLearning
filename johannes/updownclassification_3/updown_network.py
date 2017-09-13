@@ -66,7 +66,7 @@ def parseArguments():
 
 def add_layer(model, layer, args, kwargs):
     eval('model.add({}(*args,**kwargs))'.format(layer))
-    print "{}({}, {})".format(layer, ', '.join(map(str,args)), ', '.join('{} = {}'.format(k,str(v)) for k, v in kwargs.items()))
+    #print "{}({}, {})".format(layer, ', '.join(map(str,args)), ', '.join("{} = '{}'".format(k,v) if type(v) == str else '{} = {}'.format(k,str(v)) for k, v in kwargs.items()))
 
 def base_model(model_def):
     model = Sequential()
@@ -77,7 +77,6 @@ def base_model(model_def):
         mode = 'args'
         for line in f:
             cur_line = line.strip()
-            print cur_line, mode, layer
             if cur_line == '' and layer != '':
                 add_layer(model, layer, args, kwargs)
                 mode = 'args'
@@ -92,9 +91,9 @@ def base_model(model_def):
                 layer = cur_line[1:-1]
             elif mode == 'args':
                 try:
-                    args.append(eval(cur_line.split('=')[1]))
+                    args.append(eval(cur_line.split('=')[1].strip()))
                 except:
-                    args.append(cur_line.split('=')[1])
+                    args.append(cur_line.split('=')[1].strip())
             elif mode == 'kwargs':
                 split_line = cur_line.split('=')
                 try:
@@ -115,7 +114,7 @@ class MemoryCallback(keras.callbacks.Callback):
         print('RAM Usage {:.2f} GB'.format(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1e6))
         
         
-def generator(batch_size, input_data, out_data, inds, inf_times_as = 1): 
+def generator(batch_size, input_data, out_data, inds, inf_times_as = 1, normalize=True): 
     #even when using charge as input this could be left as it is (preprocess will not find any inf values)
     preprocess = jkutils.preprocess # this is needed, because python throws an error, if preprocess is used when using=time
                                     # (preprocess must then be in locals if referenced before.)
@@ -153,7 +152,7 @@ def generator(batch_size, input_data, out_data, inds, inf_times_as = 1):
                     cur_event_id = inds[cur_file][0]
                     up_to = inds[cur_file][1]
         for i in range(len(temp_in)):
-            batch_input[i] = preprocess(temp_in[i], replace_with = inf_times_as)
+            batch_input[i] = preprocess(temp_in[i], replace_with = inf_times_as, normalize=normalize)
             batch_out[i] = zenith_to_binary(temp_out[i]["zenith"])
         cur_len = 0 
         """

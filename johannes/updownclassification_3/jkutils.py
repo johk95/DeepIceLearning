@@ -161,10 +161,10 @@ def zenith_to_binary(zenith, cosined = False):
         return ret.tolist()
     
         
-def preprocess(data, replace_with=10):
+def preprocess(data, replace_with=1, normalize=True):
     """
     This function normalizes the finite values of input data to the interval [0,1] and 
-    replaces all infinity-values with replace_with (defaults to 10).
+    replaces all infinity-values with replace_with (defaults to 1).
     
     Parameters
     ----------
@@ -172,19 +172,22 @@ def preprocess(data, replace_with=10):
     
     replace_with: value that all np.inf's should be replaced with
     
+    normalize: whether the data should be normalized or not.
+    
     Returns
     -------
     ndarray
         A copy of the input data in range [0,1] and all np.inf replaced by replace_with.
     """
     ret = np.copy(data)
-    time_np_arr_max = np.max(ret[ret != np.inf])
-    time_np_arr_min = np.min(ret)
-    ret = (ret - time_np_arr_min) / (time_np_arr_max - time_np_arr_min)
+    if normalize:
+        time_np_arr_max = np.max(ret[ret != np.inf])
+        time_np_arr_min = np.min(ret)
+        ret = (ret - time_np_arr_min) / (time_np_arr_max - time_np_arr_min)
     ret[ret == np.inf] = replace_with
     return ret
 
-def fake_preprocess(data, replace_with=0):
+def fake_preprocess(data, replace_with=0, normalize=False):
     """
     This function is a helper if data has not to be preprocessed (i.e. all values stay as they are). This is an identity function
     and returns data.
