@@ -161,7 +161,7 @@ def zenith_to_binary(zenith, cosined = False):
         return ret.tolist()
     
         
-def preprocess(data, replace_with=1, normalize=True):
+def preprocess(data, replace_with=1, normalize=False):
     """
     This function normalizes the finite values of input data to the interval [0,1] and 
     replaces all infinity-values with replace_with (defaults to 1).

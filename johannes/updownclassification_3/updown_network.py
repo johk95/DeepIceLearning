@@ -211,7 +211,7 @@ if __name__ == "__main__":
         
 ################### see if --continue is set and do accordingly ###############
     if not args.testing:
-        if args.__dict__['continue'] != 'None':
+        if args.__dict__['continue'] != 'None': #needs to be updated!
             shelf = shelve.open(os.path.join(file_location,args.__dict__['continue'], 'run_info.shlf'))
             project_name = shelf['Project']
             input_files = shelf['Files'].split(':')
@@ -251,7 +251,20 @@ if __name__ == "__main__":
                 sys.exit(1)
                     
 ##################### Load and Split Dataset #########################################################
-            input_data, out_data, file_len = read_files(input_files, data_location, using=args.using, virtual_len = args.virtual_len)
+            time_normalized = False
+            try:
+                tn = parser.get('Training_Parameters', 'time_normalized')
+                if tn.lower() in ['true', '1', 'y', 'yes']:
+                    time_normalized = True
+                elif tn.lower() in ['false', '0', 'n', 'no']:
+                    time_normalized = False
+                else:
+                    raise Exception()
+            except:
+                print "option time_normalized not given. Using default False."
+                
+            input_data, out_data, file_len = read_files(input_files, data_location, 
+                                                        using=args.using, virtual_len = args.virtual_len)
 
             tvt_ratio=[float(parser.get('Training_Parameters', 'training_fraction')),
                 float(parser.get('Training_Parameters', 'validation_fraction')),
@@ -278,6 +291,7 @@ if __name__ == "__main__":
             shelf['Test_Inds'] = test_inds
             shelf['using'] = args.using
             shelf['inf_times_as'] = float(parser.get('Training_Parameters','inf_times_as'))
+            shelf['time_normalized'] = time_normalized
             shelf.close()
 
             shutil.copy(os.path.join(file_location, args.model), os.path.join(file_location, 'train_hist/{}/{}/model.cfg'.format(today, project_name)))
@@ -315,10 +329,12 @@ if __name__ == "__main__":
 
         batch_size = int(parser.get('Training_Parameters', 'batch_size'))
         model.fit_generator(generator(batch_size, input_data, out_data, train_inds,
-                                      float(parser.get('Training_Parameters','inf_times_as'))), 
+                                      float(parser.get('Training_Parameters','inf_times_as')),
+                                      normalize = time_normalized), 
                       steps_per_epoch = math.ceil(np.sum([k[1]-k[0] for k in train_inds])/batch_size),
                       validation_data = generator(batch_size, input_data, out_data, valid_inds, 
-                                                  float(parser.get('Training_Parameters','inf_times_as'))),
+                                                  float(parser.get('Training_Parameters','inf_times_as')),
+                                                  normalize = time_normalized),
                       validation_steps = math.ceil(np.sum([k[1]-k[0] for k in valid_inds])/batch_size),
                       callbacks = [CSV_log, early_stop, best_model, MemoryCallback()], 
                       epochs = int(parser.get('Training_Parameters', 'epochs')), 
@@ -349,6 +365,10 @@ if __name__ == "__main__":
             sys.exit(-1)
         shelf = shelve.open(os.path.join(file_location, project_folder, 'run_info.shlf'))
         input_files = shelf['Files'].split(':')
+        try:
+            time_normalized = shelf['time_normalized'] 
+        except:
+            time_normalized = False
         print "Input Files:", input_files
         if len(input_files) == 1: #this could be something like ['h01'] (inputformat)
             #try to decode fileinput format
@@ -395,7 +415,7 @@ if __name__ == "__main__":
     for i in range(len(input_data)):
         print('Predict Values for {}'.format(input_files[i]))
         test_in_chunk  = preprocess(input_data[i][test_inds[i][0]:test_inds[i][1]], 
-                                    replace_with = inf_times_as)
+                                    replace_with = inf_times_as, normalize=time_normalized)
         out_zenith_chunk = out_data[i][test_inds[i][0]:test_inds[i][1],"zenith"]
         test_out_chunk = zenith_to_binary(out_zenith_chunk)
         res_chunk = model.predict(test_in_chunk, verbose=int(parser.get('Training_Parameters', 'verbose')))
