@@ -59,6 +59,7 @@ def parseArguments():
     parser.add_argument("--filesizes", help="Print the number of events in each file and don't do anything else.", nargs='?',
                        const=True, default=False)
     parser.add_argument("--testing", help="loads latest model and just does some testing", nargs='?', const=True, default=False)
+    parser.add_argument("--valid", help="save the test results for validation data", nargs='?', const=True, default=False)
     parser.add_argument("--crtfolders", help="creates the folderstructure so you can redirect nohup output to it. take care of day-change: at 7'o'clock in the morning (german summer time).", nargs='?', const=True, default=False)
       # Parse arguments
     args = parser.parse_args()
@@ -114,7 +115,7 @@ class MemoryCallback(keras.callbacks.Callback):
         print('RAM Usage {:.2f} GB'.format(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1e6))
         
         
-def generator(batch_size, input_data, out_data, inds, inf_times_as = 1, normalize=True): 
+def generator(batch_size, input_data, out_data, inds, inf_times_as = 1, normalize=True, realzenith=False): 
     #even when using charge as input this could be left as it is (preprocess will not find any inf values)
     preprocess = jkutils.preprocess # this is needed, because python throws an error, if preprocess is used when using=time
                                     # (preprocess must then be in locals if referenced before.)
@@ -153,7 +154,7 @@ def generator(batch_size, input_data, out_data, inds, inf_times_as = 1, normaliz
                     up_to = inds[cur_file][1]
         for i in range(len(temp_in)):
             batch_input[i] = preprocess(temp_in[i], replace_with = inf_times_as, normalize=normalize)
-            batch_out[i] = zenith_to_binary(temp_out[i]["zenith"])
+            batch_out[i] = zenith_to_binary(temp_out[i]["zenith"]) if not realzenith else temp_out[i]["zenith"]
         cur_len = 0 
         """
         from scipy.stats import describe
@@ -407,21 +408,32 @@ if __name__ == "__main__":
     out_zeniths = []
     test_out = []
   
-    inf_times_as=float(parser.get('Training_Parameters','inf_times_as'))
-    if args.using == 'charge':
-        preprocess = jkutils.fake_preprocess
+    gen_size = 1000
+    
+    if args.valid:
+        test_on = "valid"
+        t_inds = train_inds
     else:
-        preprocess = jkutils.preprocess
-    for i in range(len(input_data)):
-        print('Predict Values for {}'.format(input_files[i]))
-        test_in_chunk  = preprocess(input_data[i][test_inds[i][0]:test_inds[i][1]], 
-                                    replace_with = inf_times_as, normalize=time_normalized)
-        out_zenith_chunk = out_data[i][test_inds[i][0]:test_inds[i][1],"zenith"]
+        test_on = "train"
+        t_inds = valid_inds
+    total_len = sum([b-a for a, b in t_inds])
+    print "testing on {} files ".format(test_on), input_files
+    run = 0
+    for (b_inp, b_outp) in generator(gen_size, input_data, out_data, t_inds, 
+                       float(parser.get('Training_Parameters','inf_times_as')),
+                       normalize = time_normalized, realzenith=True):
+        if run%10 == 0:
+            print('Predict Values in run {}, event {} / {}'.format(run, run*gen_size, total_len))
+        test_in_chunk  = b_inp
+        out_zenith_chunk = b_outp
         test_out_chunk = zenith_to_binary(out_zenith_chunk)
         res_chunk = model.predict(test_in_chunk, verbose=int(parser.get('Training_Parameters', 'verbose')))
         res.extend(list(res_chunk))
         out_zeniths.extend(list(out_zenith_chunk))
         test_out.extend(list(test_out_chunk))
+        run += 1
+        if run*gen_size > total_len:
+            break
         
   
     res = np.squeeze(res)
@@ -434,3 +446,4 @@ if __name__ == "__main__":
     print "{} / {} = {:6.2f}%".format(correct, total, float(correct)/total*100)
   
     print(' \n Finished .... ')
+
